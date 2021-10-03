@@ -19,29 +19,30 @@ contract("Token", function (accounts) {
   
   describe('deployment', () => {
 
-    // Test token name 
     it("token name should be", async () => {
       const result = await token.name();
       result.should.equal(name);
     });
-
-    // Test token symbol 
+ 
     it("token symbol should be", async () => {
       const result = await token.symbol();
       result.should.equal(symbol);
     });
-
-    // Test token decimals 
+ 
     it("token decimals should be", async () => {
       const result = await token.decimals();
       result.toString().should.equal(decimals);
     });
 
-    // Test token total supply 
     it("token total supply should be", async () => {
       const result = await token.totalSupply();
       result.toString().should.equal(totalSupply);
     });
+
+    it("assigns the total supply to the deployer", async() => {
+      const result = await token.balanceOf(accounts[0]);
+      result.toString().should.equal(totalSupply);
+    }); 
 
   });
   
